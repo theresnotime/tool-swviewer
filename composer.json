@@ -1,0 +1,7 @@
+{
+    "require": {
+        "mediawiki/oauthclient": "^1.0",
+        "wikimedia/language-data": "^1.0",
+        "workerman/workerman": "^4.0"
+    }
+}
