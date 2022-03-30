@@ -10,7 +10,7 @@ if ((!isset($_SESSION['tokenKey']) || !isset($_SESSION['tokenSecret']) || !isset
 }
 session_write_close();
 if (isset($_GET['token_proxy'])) {
-    $serverToken = parse_ini_file("/data/project/swviewer/security/bottoken.ini")["serverTokenTalk"];
+    $serverToken = parse_ini_file(__DIR__ . '/../../security/bottoken.ini')["serverTokenTalk"];
     if ($serverToken !== $_GET["token_proxy"]) {
         echo "Invalid request";
         exit(0);

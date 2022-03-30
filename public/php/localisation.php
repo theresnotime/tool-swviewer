@@ -6,7 +6,7 @@ $rtl = Array ("dv", "nqo", "syc", "arc", "yi", "ydd", "tmr", "lad-hebr", "he", "
 $language_exists = array();
 
 if (isset($_GET["init"])) {
-    $files = scandir("/data/project/swviewer/public_html/i18n/");
+    $files = scandir(__DIR__ . '/../i18n/');
     foreach ($files as $value) {
         $code = str_replace(".json", "", $value);
         if (strstr($value, ".json") && $code !== "qqq" && array_key_exists($code, $languages)) {
@@ -18,7 +18,7 @@ if (isset($_GET["init"])) {
 }
 
 if (isset($_GET["mycode"])) {
-    $files = scandir("/data/project/swviewer/public_html/i18n/");
+    $files = scandir(__DIR__ . '/../i18n/');
     foreach ($files as $value) {
         $code = str_replace(".json", "", $value);
         if (strstr($value, ".json") && $code !== "qqq" && array_key_exists($code, $languages)) {

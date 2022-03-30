@@ -1,5 +1,5 @@
 <?php
-require_once '/data/project/swviewer/vendor/autoload.php';
+require_once __DIR__ . '/../../../vendor/autoload.php';
 use MediaWiki\OAuthClient\Client;
 use MediaWiki\OAuthClient\ClientConfig;
 use MediaWiki\OAuthClient\Consumer;
@@ -13,7 +13,7 @@ session_cache_expire(0);
 
 session_name( 'SWViewer' );
 session_start();
-$config = require_once '/data/project/swviewer/security/config.php';
+$config = require_once __DIR__ . '/../../../security/config.php';
 $conf = new ClientConfig( $config['url'] );
 $conf->setConsumer( new Consumer( $config['consumer_key'], $config['consumer_secret'] ) );
 $client = new Client( $conf );

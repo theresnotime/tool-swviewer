@@ -1,13 +1,13 @@
 <?php
 header('Content-Type: text/plain; charset=utf-8');
-require_once '/data/project/swviewer/vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 use MediaWiki\OAuthClient\Client;
 use MediaWiki\OAuthClient\ClientConfig;
 use MediaWiki\OAuthClient\Consumer;
 use MediaWiki\OAuthClient\Token;
 
-$configFile = '/data/project/swviewer/security/config.php';
+$configFile = __DIR__ . '/../../security/config.php';
 
 $config = require_once $configFile;
 $conf = new ClientConfig($config['url']);
@@ -122,7 +122,7 @@ else {
 }
 
 $ts_pw = posix_getpwuid(posix_getuid());
-$ts_mycnf = parse_ini_file("/data/project/swviewer/security/replica.my.cnf");
+$ts_mycnf = parse_ini_file(__DIR__ . '/../../security/replica.my.cnf');
 $db = new PDO("mysql:host=tools.labsdb;dbname=s53950__SWViewer;charset=utf8", $ts_mycnf['user'], $ts_mycnf['password']);
 unset($ts_mycnf, $ts_pw);
 
@@ -140,7 +140,7 @@ if ($_SESSION['mode'] == 'global')
     $isGlobal = 1;
 $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2); if ($lang === null) $lang = "en";
 if (($q->rowCount() <= 0) || ($q->rowCount() > 0 && ($resToken[0]["token"] == null || $resToken[0]["token"] == "" || !isset($resToken[0]["token"])))) {
-    $salt = parse_ini_file("/data/project/swviewer/security/bottoken.ini")["salt"];
+    $salt = parse_ini_file(__DIR__ . '/../../security/bottoken.ini')["salt"];
     $_SESSION['talkToken'] = md5(uniqid($ident->username, true) . rand() . md5($salt));
     if ($q->rowCount() <= 0) {
         $q = $db->prepare('INSERT INTO user (name, token, lang, local_wikis, isGlobalAccess, isGlobal, userRole, rebind) VALUES (:name, :token, :lang, :local_wikis, :isGlobalAccess, :isGlobal, :userRole, 0)');

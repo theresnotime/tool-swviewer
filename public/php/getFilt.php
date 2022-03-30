@@ -8,7 +8,7 @@ if (!isset($_GET['token_proxy']) || !isset($_GET['username']) || !isset($_GET['p
     exit();
 }
 if (isset($_GET['token_proxy'])) {
-    $serverToken = parse_ini_file("/data/project/swviewer/security/bottoken.ini")["serverTokenTalk"];
+    $serverToken = parse_ini_file(__DIR__ . '/../../security/bottoken.ini')["serverTokenTalk"];
     if ($serverToken !== $_GET["token_proxy"]) {
         echo json_encode(["result" => "error", "info" => "Invalid request", "code" => 2]);
         exit();
@@ -18,7 +18,7 @@ if (isset($_GET['token_proxy'])) {
 $username = $_GET['username'];
 
 $ts_pw = posix_getpwuid(posix_getuid());
-$ts_mycnf = parse_ini_file("/data/project/swviewer/security/replica.my.cnf");
+$ts_mycnf = parse_ini_file(__DIR__ . '/../../security/replica.my.cnf');
 $db = new PDO("mysql:host=tools.labsdb;dbname=s53950__SWViewer;charset=utf8", $ts_mycnf['user'], $ts_mycnf['password']);
 unset($ts_mycnf, $ts_pw);
 

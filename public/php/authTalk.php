@@ -5,14 +5,14 @@ if (!isset($_POST['serverToken']) || !isset($_POST['userToken']) || !isset($_POS
     echo json_encode(["auth" => "Error. Dev. code: 1"]);
     exit();
 }
-$serverToken = parse_ini_file("/data/project/swviewer/security/bottoken.ini")["serverTokenTalk"];
+$serverToken = parse_ini_file(__DIR__ . '/../../security/bottoken.ini')["serverTokenTalk"];
 if ($_POST['serverToken'] !== $serverToken) {
     echo json_encode(["auth" => "Error. Dev. code: 2"]);
     exit();
 }
 
 $ts_pw = posix_getpwuid(posix_getuid());
-$ts_mycnf = parse_ini_file("/data/project/swviewer/security/replica.my.cnf");
+$ts_mycnf = parse_ini_file(__DIR__ . '/../../security/replica.my.cnf');
 $db = new PDO("mysql:host=tools.labsdb;dbname=s53950__SWViewer;charset=utf8", $ts_mycnf['user'], $ts_mycnf['password']);
 unset($ts_mycnf, $ts_pw, $serverToken);
 

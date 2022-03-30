@@ -27,7 +27,7 @@ if ($separatorPos !== false) {
 }
 
 $ts_pw = posix_getpwuid(posix_getuid());
-$ts_mycnf = parse_ini_file("/data/project/swviewer/security/replica.my.cnf");
+$ts_mycnf = parse_ini_file(__DIR__ . '/../../security/replica.my.cnf');
 $db = new PDO("mysql:host=tools.labsdb;dbname=s53950__SWViewer;charset=utf8", $ts_mycnf['user'], $ts_mycnf['password']);
 unset($ts_mycnf, $ts_pw);
 

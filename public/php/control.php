@@ -16,14 +16,14 @@ if ($userName !== "Ajbura" && $userName !== "Iluvatar" && $userName !== "1997kB"
 }
 
 if (isset($_GET["restart"])) {
-    $serverToken = parse_ini_file("/data/project/swviewer/security/bottoken.ini")["serverTokenTalk"];
+    $serverToken = parse_ini_file(__DIR__ . '/../../security/bottoken.ini')["serverTokenTalk"];
     $context = stream_context_create(array('http' => array('method' => 'GET', 'header' => "auth: " . $serverToken . "\r\n" . "User-Agent: swviewer.toolforge\r\n")));
     file_get_contents("https://swviewer-service.toolforge.org/restart", false, $context);
     exit();
 }
 
 $ts_pw = posix_getpwuid(posix_getuid());
-$ts_mycnf = parse_ini_file("/data/project/swviewer/security/replica.my.cnf");
+$ts_mycnf = parse_ini_file(__DIR__ . '/../../security/replica.my.cnf');
 $db = new PDO("mysql:host=tools.labsdb;dbname=s53950__SWViewer;charset=utf8", $ts_mycnf['user'], $ts_mycnf['password']);
 unset($ts_mycnf, $ts_pw);
 
